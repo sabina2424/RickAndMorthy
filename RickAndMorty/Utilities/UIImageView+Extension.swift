@@ -22,7 +22,7 @@ extension UIImageView {
             let request = URLRequest(url: url)
             URLSession.shared.dataTask(with: request) { data, _, error in
                 DispatchQueue.main.async {
-                    if let downloadedImage = UIImage(data: data!) {
+                    if let data = data, let downloadedImage = UIImage(data: data) {
                         self.image = downloadedImage
                         imageCache.setObject(downloadedImage, forKey: urlString as NSString)
                     }

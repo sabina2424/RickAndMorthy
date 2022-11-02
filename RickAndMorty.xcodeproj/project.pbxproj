@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102DDF4F2910F24C006F44D1 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102DDF4E2910F24C006F44D1 /* FilterViewController.swift */; };
 		10D75527290E57970090A3AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75526290E57970090A3AA /* AppDelegate.swift */; };
 		10D75529290E57970090A3AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75528290E57970090A3AA /* SceneDelegate.swift */; };
 		10D75530290E57990090A3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D7552F290E57990090A3AA /* Assets.xcassets */; };
@@ -33,10 +34,10 @@
 		10D75573290E90070090A3AA /* TitleSubtitleCell+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75572290E90070090A3AA /* TitleSubtitleCell+Style.swift */; };
 		10D75576290EBB1D0090A3AA /* LeftImageRightLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75575290EBB1D0090A3AA /* LeftImageRightLabelCollectionViewCell.swift */; };
 		10D75578290EBB6A0090A3AA /* LeftImageRightLabelCollectionViewCell + Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75577290EBB6A0090A3AA /* LeftImageRightLabelCollectionViewCell + Item.swift */; };
-		10D7557A290EBD8C0090A3AA /* CustomCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D75579290EBD8C0090A3AA /* CustomCollectionFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		102DDF4E2910F24C006F44D1 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		10D75523290E57970090A3AA /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D75526290E57970090A3AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10D75528290E57970090A3AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		10D75572290E90070090A3AA /* TitleSubtitleCell+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitleSubtitleCell+Style.swift"; sourceTree = "<group>"; };
 		10D75575290EBB1D0090A3AA /* LeftImageRightLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftImageRightLabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		10D75577290EBB6A0090A3AA /* LeftImageRightLabelCollectionViewCell + Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LeftImageRightLabelCollectionViewCell + Item.swift"; sourceTree = "<group>"; };
-		10D75579290EBD8C0090A3AA /* CustomCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +121,7 @@
 				10D7553B290E587F0090A3AA /* MainViewController.swift */,
 				10D75557290E7E5D0090A3AA /* MainViewModel.swift */,
 				10D7555B290E7F390090A3AA /* MainViewState.swift */,
+				102DDF4E2910F24C006F44D1 /* FilterViewController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -138,7 +139,6 @@
 		10D75544290E602E0090A3AA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				10D75579290EBD8C0090A3AA /* CustomCollectionFlowLayout.swift */,
 				10D75545290E60440090A3AA /* Constants.swift */,
 				10D75555290E6E830090A3AA /* String+Extension.swift */,
 				10D7555D290E80580090A3AA /* UIViewController+Extension.swift */,
@@ -281,7 +281,6 @@
 				10D75561290E83770090A3AA /* CharacterDetailsViewModel.swift in Sources */,
 				10D75556290E6E830090A3AA /* String+Extension.swift in Sources */,
 				10D7554B290E62D80090A3AA /* EndPoint.swift in Sources */,
-				10D7557A290EBD8C0090A3AA /* CustomCollectionFlowLayout.swift in Sources */,
 				10D7555E290E80580090A3AA /* UIViewController+Extension.swift in Sources */,
 				10D75578290EBB6A0090A3AA /* LeftImageRightLabelCollectionViewCell + Item.swift in Sources */,
 				10D7554F290E63380090A3AA /* RickAndMortyEndPoints.swift in Sources */,
@@ -292,6 +291,7 @@
 				10D7554D290E62FE0090A3AA /* ResponseModel.swift in Sources */,
 				10D75546290E60440090A3AA /* Constants.swift in Sources */,
 				10D75529290E57970090A3AA /* SceneDelegate.swift in Sources */,
+				102DDF4F2910F24C006F44D1 /* FilterViewController.swift in Sources */,
 				10D75554290E6B9E0090A3AA /* FilterCharactersRequestModel.swift in Sources */,
 				10D75569290E8AF50090A3AA /* UIImageView+Extension.swift in Sources */,
 				10D75558290E7E5D0090A3AA /* MainViewModel.swift in Sources */,

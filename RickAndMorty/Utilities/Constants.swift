@@ -12,4 +12,5 @@ enum Constants {
     static let unknwon = "Unknown"
     static let cancel = "Cancel"
     static let searchText = "Enter character's name"
+    static let filter = "Filter"
 }

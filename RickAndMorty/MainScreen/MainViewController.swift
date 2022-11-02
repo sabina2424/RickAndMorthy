@@ -11,7 +11,8 @@ class MainViewController: UIViewController {
     
    private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
-        activityIndicator.color = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+       activityIndicator.color = .systemGray
+       activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
@@ -19,8 +20,18 @@ class MainViewController: UIViewController {
         let searchView = UISearchController()
         searchView.searchResultsUpdater = self
         searchView.obscuresBackgroundDuringPresentation = false
-        searchView.searchBar.placeholder = Constants.searchText
+        searchView.searchBar.searchTextField.leftView?.tintColor = UIColor.green
+        searchView.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: Constants.searchText, attributes: [NSAttributedString.Key.foregroundColor : UIColor.green])
+        searchView.searchBar.delegate = self
         return searchView
+    }()
+    
+    lazy var backgoundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "blure")
+        imageView.frame = view.bounds
+        return imageView
     }()
     
     private lazy var collectionView: UICollectionView = {
@@ -36,11 +47,6 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-    lazy var collectionViewFlowLayout : CustomCollectionViewFlowLayout = {
-        let layout = CustomCollectionViewFlowLayout(display: .list, containerWidth: self.view.bounds.width)
-        return layout
-    }()
-    
     let viewModel: MainViewModel
     
     init(viewModel: MainViewModel) {
@@ -54,10 +60,24 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         viewModel.fetchData()
         setupViewModel()
         setupView()
+    }
+    
+    @objc private func filterTapped() {
+        let filterViewController = FilterViewController()
+        filterViewController.didApplyFilterTapped = { [weak self] filters in
+            
+            print("here isFilter: ", filters)
+        }
+        let nav = UINavigationController(rootViewController: filterViewController)
+        nav.modalPresentationStyle = .pageSheet
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+
+        }
+        present(nav, animated: true, completion: nil)
     }
     
     private func setupViewModel() {
@@ -90,17 +110,19 @@ class MainViewController: UIViewController {
     
     private func setupView() {
         self.title = "Rick and Morthy forever!"
-        view.backgroundColor = .systemBackground
-        collectionView.collectionViewLayout = collectionViewFlowLayout
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.green]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constants.filter, style: .plain, target: self, action: #selector(filterTapped))
         navigationItem.searchController = searchController
-        
-        view.addSubview(collectionView)
+        [backgoundImage, collectionView, activityIndicator].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
@@ -114,7 +136,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(LeftImageRightLabelCollectionViewCell.self)", for: indexPath) as? LeftImageRightLabelCollectionViewCell else { return UICollectionViewCell() }
         let item = viewModel.characters[indexPath.row]
-        cell.configure(item: .init(leftImage: item.image ?? "", title: item.name, subtitle: item.gender))
+        cell.configure(item: .init(leftImage: item.image ?? "", title: item.name, subtitle: item.species))
         return cell
     }
     
@@ -127,16 +149,23 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = viewModel.characters[indexPath.row]
-        navigationController?.pushViewController(CharacterDetailsViewController(viewModel: CharacterDetailsViewModel(inputData: .init(avatarImage: data.image, name: data.name, gender: data.gender, status: .init(rawValue: data.status ?? "Unknown"), species: data.species, type: data.type, location: data.location?.name))), animated: true)
+        let charactersViewController = CharacterDetailsViewController(viewModel: CharacterDetailsViewModel(inputData: .init(avatarImage: data.image, name: data.name, gender: data.gender, status: .init(rawValue: data.status ?? "Unknown"), species: data.species, type: data.type, location: data.location?.name)))
+        
+        navigationController?.pushViewController(charactersViewController, animated: true)
     }
 }
 
 // MARK: - SearchController Update delegate
-extension MainViewController: UISearchResultsUpdating {
+extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.searchTextField.text else { return }
+        print(searchText)
+    }
 }
+
 

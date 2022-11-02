@@ -22,7 +22,7 @@ extension TitleSubtitleTableViewCell {
         }
         
         static var defaultSubtitleColor: UIColor {
-            return UIColor.white
+            return UIColor.green
         }
         
         public let defaultTitleColor: UIColor

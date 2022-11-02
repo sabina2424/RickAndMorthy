@@ -83,6 +83,7 @@ class CharacterDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        self.navigationController?.navigationBar.tintColor = UIColor.green
         statusLabel.text = viewModel.setupStatus()
     }
     

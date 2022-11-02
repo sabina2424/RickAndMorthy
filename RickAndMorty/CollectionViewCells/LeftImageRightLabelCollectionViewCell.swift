@@ -18,6 +18,10 @@ class LeftImageRightLabelCollectionViewCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = UIColor.green
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         return label
     }()
     
@@ -25,7 +29,8 @@ class LeftImageRightLabelCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = UIColor.green
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
@@ -51,20 +56,19 @@ class LeftImageRightLabelCollectionViewCell: UICollectionViewCell {
             leftImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             leftImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 0.5),
             
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leftImageView.trailingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             
-            subtitleLabel.leadingAnchor.constraint(equalTo: leftImageView.trailingAnchor, constant: 8),
-            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            subtitleLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
+            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
         ])
     }
     
     private func configureAppearance() {
-        contentView.clipsToBounds = true
-        contentView.layer.borderColor = UIColor.white.cgColor
-        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.green.cgColor
+        contentView.layer.borderWidth = 2
         contentView.layer.cornerRadius = 6
     }
 }

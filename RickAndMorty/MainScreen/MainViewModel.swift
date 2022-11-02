@@ -12,6 +12,7 @@ class MainViewModel {
     private let service: CharactersNetworkServiceProtocol
     var characters: [Character] = []
     var currentPage: Int = 1
+    var filters: FilterCharactersRequestModel? 
     
     init(service: CharactersNetworkServiceProtocol = CharactersNetworkService()) {
         self.service = service
@@ -19,9 +20,9 @@ class MainViewModel {
     
     var changeHandler: ((MainViewState) -> Void)?
     
-     func fetchData() {
+    func fetchData() {
         changeHandler?(.isFetching(true))
-        service.getCharacters(page: currentPage, filters: nil) { [weak self] result in
+        service.getCharacters(page: currentPage, filters: filters ?? nil) { [weak self] result in
             guard let self = self else { return }
             self.changeHandler?(.isFetching(false))
             switch result {
